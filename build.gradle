@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.0.15'
+}
+
+group 'com.petstore'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    serenity_version = '4.0.15'
+    junit_platform_launcher_version = '1.10.0'
+    cucumber_version = '7.14.0'
+    logback_version = '1.4.11'
+    assertj_version = '3.24.2'
+}
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-core:${serenity_version}"
+    implementation "net.serenity-bdd:serenity-rest-assured:${serenity_version}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenity_version}"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:${serenity_version}"
+    implementation "net.serenity-bdd:serenity-cucumber:${serenity_version}"
+    
+    testImplementation "net.serenity-bdd:serenity-junit5:${serenity_version}"
+    testImplementation "org.junit.platform:junit-platform-suite-api:1.10.0"
+    testImplementation "org.junit.platform:junit-platform-suite-engine:1.10.0"
+    testImplementation "io.cucumber:cucumber-junit-platform-engine:7.14.0"
+    testImplementation "org.junit.platform:junit-platform-launcher:${junit_platform_launcher_version}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.10.0"
+    
+    implementation "ch.qos.logback:logback-classic:${logback_version}"
+    testImplementation "org.assertj:assertj-core:${assertj_version}"
+    
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+serenity {
+    reports = ["single-page-html"]
+}
