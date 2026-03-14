@@ -52,9 +52,16 @@ To run the complete test suite and generate documentation:
 ```
 
 ### Interpreting Results
-After execution, Serenity generates a high-quality living documentation report.
-- **Serenity Report**: `target/site/serenity/index.html`
-- **Cucumber Summary**: Displayed directly in the terminal output.
+After execution, the project generates several reports:
+
+| Report Type | Path from Project Root | Description |
+| :--- | :--- | :--- |
+| **Serenity BDD** | `target/site/serenity/index.html` | High-quality living documentation with step-by-step REST logs. |
+| **Gradle Test** | `build/reports/tests/test/index.html` | Standard Gradle execution report (pass/fail overview). |
+| **JUnit XML** | `build/test-results/test/*.xml` | Machine-readable results for CI/CD integration. |
+
+> [!TIP]
+> Always use the **Serenity Report** for debugging failures, as it captures the full request and response bodies for every API interaction.
 
 ## 🏗 Architecture & Patterns
 
@@ -62,11 +69,17 @@ The project follows the **Screenplay Pattern**, which shifts the focus from "Pag
 
 ```mermaid
 graph TD
-    Actor((Actor)) -->|performs| Task[Task: AddPet]
-    Task -->|uses| Interaction[Interaction: Post.to]
-    Interaction -->|executes| API((PetStore API))
-    Actor -->|asks| Question[Question: ThePetDetails]
-    Question -->|retrieves| API
+    subgraph "Screenplay Architecture"
+        Actor((Actor: User)) -->|performs| Task[Tasks: Add, Consult, Update, Delete]
+        Task -->|uses| Interaction[Interactions: Post, Get, Put, Delete]
+        Interaction -->|executes| API((PetStore API))
+        
+        Actor -->|asks| Question[Questions: ThePetDetails, LastResponseStatusCode]
+        Question -->|reads| Response[SerenityRest: lastResponse]
+        Response -->|maps to| Model[Models: Pet, Category, Tag]
+        
+        Task -.->|manages| Model
+    end
 ```
 
 ### Design Patterns Implemented
