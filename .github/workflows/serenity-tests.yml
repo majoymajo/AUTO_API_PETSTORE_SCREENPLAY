@@ -2,9 +2,9 @@ name: Serenity BDD API Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop, 'feature/**' ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop, 'feature/**' ]
   workflow_dispatch:
 
 jobs:
