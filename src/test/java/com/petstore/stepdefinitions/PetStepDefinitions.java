@@ -22,14 +22,12 @@ public class PetStepDefinitions {
 
     @Given("that the user wants to manage the pet records")
     public void setupActor() {
-        // Actor is initialized in Hooks
     }
 
     @When("they create a new pet with name {string} and status {string}")
     public void createPet(String name, String status) {
         currentPet = new Pet(name, status);
         theActorInTheSpotlight().attemptsTo(AddPet.withDetails(currentPet));
-        // Capture the ID from the response for subsequent steps
         currentPet.setId(theActorInTheSpotlight().asksFor(ThePetDetails.inResponse()).getId());
     }
 
@@ -73,7 +71,6 @@ public class PetStepDefinitions {
     @Then("the pet record should no longer exist")
     public void verifyDeletion() {
         theActorInTheSpotlight().should(seeThat(LastResponseStatusCode.is(), equalTo(200)));
-        // Verify it's actually gone
         theActorInTheSpotlight().attemptsTo(ConsultPet.withId(currentPet.getId()));
         theActorInTheSpotlight().should(seeThat(LastResponseStatusCode.is(), equalTo(404)));
     }
