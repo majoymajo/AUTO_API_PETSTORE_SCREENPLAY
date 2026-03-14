@@ -32,6 +32,7 @@ src
     │   ├── hooks            # Setup/Teardown logic
     │   └── stepdefinitions  # Cucumber step mappings
     └── resources/features   # Gherkin feature files
+```
 
 The project follows the **Screenplay Pattern**, which shifts the focus from "Page Objects" (which can become bloated) to "Actors" who perform "Tasks" and ask "Questions".
 
