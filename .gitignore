@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+build/
+gradle-temp/
+
+# Serenity / Maven / Target
+target/
+bin/
+out/
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.settings/
+.project
+.classpath
+.factorypath
+
+# OS / Cloud Sync
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.icloud
+
+# Understand-Anything (Local AI tool data)
+Understand-Anything/
