@@ -50,7 +50,7 @@ dependencies {
     implementation "ch.qos.logback:logback-classic:${logback_classic_version}"
     testImplementation "org.assertj:assertj-core:${assertj_core_version}"
     
-    // Existing dependencies from project
+    
     implementation 'com.github.javafaker:javafaker:1.0.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 }
