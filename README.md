@@ -1,38 +1,56 @@
 # PetStore API Automation - Serenity BDD & Screenplay
 
+[![Serenity BDD](https://img.shields.io/badge/Serenity_BDD-5.3.2-blue.svg)](https://serenity-bdd.info/)
+[![Java Version](https://img.shields.io/badge/Java-23-orange.svg)](https://www.oracle.com/java/technologies/downloads/)
+[![Build Status](https://img.shields.io/badge/Build-Gradle-green.svg)](https://gradle.org/)
+
+
 Professional API test automation project for the [Swagger PetStore](https://petstore.swagger.io) using the modern **Screenplay Pattern** with **Serenity BDD**.
 
 ## 📑 Index
 
 - [🚀 Project Overview](#-project-overview)
+- [✨ Key Features](#-key-features)
 - [📂 Project Structure](#-project-structure)
 - [📋 Prerequisites](#-prerequisites)
-- [⚙️ Installation & Setup](#️-installation--setup)
-- [Executing Tests](#executing-tests)
-- [Reports](#reports)
-- [✅ Buenas Prácticas de Programación](#-buenas-prácticas-de-programación)
+- [⚙️ Installation & Setup](#-installation--setup)
+- [🏃 Executing Tests](#-executing-tests)
+- [📊 Reports](#-reports)
+- [✅ Quality Standards & Best Practices](#-quality-standards--best-practices)
   - [Design Patterns Implemented](#design-patterns-implemented)
   - [SOLID Principles](#solid-principles)
 - [🛠 Tech Stack](#-tech-stack)
+
 
 ## 🚀 Project Overview
 
 This project provides a comprehensive automated testing suite for the PetStore API, covering the complete lifecycle of a "Pet" resource through CRUD (Create, Read, Update, Delete) operations. It is designed to demonstrate high-quality automation standards, emphasizing maintainability, readability, and scalability.
 
+## ✨ Key Features
+
+- **Fluent API Testing**: Leverage Serenity RestAssured for readable and powerful API interactions.
+- **Screenplay Pattern**: Modular and reusable test components following an actor-centric approach.
+- **Living Documentation**: Automatically generated rich reports with step-by-step execution details.
+- **Data Driven Testing**: Easily extensible with external data sources or object-oriented data models.
+- **Fail-Safe Execution**: Configured to continue tests on failure to gather maximum insights.
+
+
 ## 📂 Project Structure
 
 ```text
 src
-├── main/java/com/petstore
-│   ├── models        # Data Transfer Objects (DTOs)
-│   ├── questions     # Classes to query system state
-│   └── tasks         # Executable business actions
 └── test
     ├── java/com/petstore
     │   ├── hooks            # Setup/Teardown logic
-    │   └── stepdefinitions  # Cucumber step mappings
-    └── resources/features   # Gherkin feature files
+    │   ├── models           # Data Transfer Objects (DTOs)
+    │   ├── questions        # Classes to query system state
+    │   ├── stepdefinitions  # Cucumber step mappings
+    │   └── tasks            # Executable business actions
+    └── resources
+        ├── features         # Gherkin feature files
+        └── serenity.conf    # Serenity configuration
 ```
+
 
 The project follows the **Screenplay Pattern**, which shifts the focus from "Page Objects" (which can become bloated) to "Actors" who perform "Tasks" and ask "Questions".
 
@@ -76,13 +94,15 @@ graph TD
    .\gradlew clean build
    ```
 
-## Executing Tests
+## 🏃 Executing Tests
+
 To run the complete test suite and generate documentation:
 ```powershell
 .\gradlew clean test
 ```
 
-## Reports
+## 📊 Reports
+
 After execution, the project generates several reports:
 
 | Report Type | Path from Project Root | Description |
@@ -91,14 +111,18 @@ After execution, the project generates several reports:
 | **Gradle Test** | `build/reports/tests/test/index.html` | Standard Gradle execution report (pass/fail overview). |
 | **JUnit XML** | `build/test-results/test/*.xml` | Machine-readable results for CI/CD integration. |
 
-## ✅ Buenas Prácticas de Programación
+> [!TIP]
+> Always use the **Serenity BDD Report** (target/site/serenity/index.html) for debugging failures, as it captures the full request and response bodies for every API interaction.
 
-Este proyecto se ha desarrollado garantizando estándares de calidad profesionales y buenas prácticas:
+## ✅ Quality Standards & Best Practices
 
-- **Código Limpio (Clean Code)**: 
-  - Entorno de código completamente libre de comentarios (`//` o `/* */`) dentro de las clases. El código es autoexplicativo por su estructura, fluidez (gracias al patrón Screenplay) e intencionalidad, lo que reduce el ruido visual y facilita el mantenimiento a largo plazo.
-- **Nomenclatura Semántica**: 
-  - Nombres de variables, métodos y clases han sido estructurados de manera clara, descriptivos y legibles en formato CamelCase, para revelar su propósito real y contexto de negocio, garantizando gran legibilidad sin requerir documentación técnica o comentarios adicionales para entender su comportamiento.
+This project is developed with professional quality standards and best practices:
+
+- **Clean Code**: 
+  - **Zero Comments Policy**: The codebase is completely free of inline comments (`//` or `/* */`). The logic is self-explanatory through its structure, fluent DSL (Screenplay), and clear naming.
+- **Semantic Naming**: 
+  - Variables, methods, and classes use descriptive, context-aware names in CamelCase, revealing their business purpose without needing extra documentation.
+
 
 ### Design Patterns Implemented
 - **Screenplay Pattern**: Decoupled architecture where actors perform specific tasks.
@@ -118,8 +142,8 @@ Este proyecto se ha desarrollado garantizando estándares de calidad profesional
 | :--- | :--- | :--- |
 | **Language** | Java | 23+ |
 | **Build Tool** | Gradle | 8.12.1 |
-| **Testing Framework**| Serenity BDD | 4.0.15 |
+| **Testing Framework**| Serenity BDD | 5.3.2 |
 | **Pattern** | Screenplay | - |
-| **BDD Tool** | Cucumber | 7.14.0 |
-| **Assertions** | AssertJ / Hamcrest | 3.24.2 / 2.2 |
+| **BDD Tool** | Cucumber | 7.34.2 |
+| **Assertions** | AssertJ | 3.23.1 |
 | **REST Client** | RestAssured | Included in Serenity |
